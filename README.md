@@ -1,4 +1,7 @@
 # UOCIS322 - Project 1 #
+AUTHOR: Aniel Flores-Lopez
+email: aflores9@uoregon.edu
+
 
 This project will get you started with creating a simple webpage server.
 

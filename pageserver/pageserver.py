@@ -90,13 +90,29 @@ def respond(sock):
     log.info("Request was {}\n***\n".format(request))
 
     parts = request.split()
-    if len(parts) > 1 and parts[0] == "GET":
+
+    options = get_options()
+    docroot = options.DOCROOT
+    pat = docroot + parts[1]
+        
+
+    if ".."  in parts[1] or "~" in parts[1]:
+        transmit(STATUS_FORBIDDEN,sock)
+        transmit(STATUS_FORBIDDEN,sock)
+    elif len(parts) > 1 and parts[0] == "GET":
         transmit(STATUS_OK, sock)
         transmit(CAT, sock)
+        
+        
+
     else:
         log.info("Unhandled request: {}".format(request))
         transmit(STATUS_NOT_IMPLEMENTED, sock)
         transmit("\nI don't handle this request: {}\n".format(request), sock)
+
+    
+    
+
 
     sock.shutdown(socket.SHUT_RDWR)
     sock.close()
